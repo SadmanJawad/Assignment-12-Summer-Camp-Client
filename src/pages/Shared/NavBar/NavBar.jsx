@@ -55,7 +55,6 @@ const NavBar = () => {
                 <FaUser></FaUser>
                }
                </li>
-               
                 <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
             </> : <>
                 <li><Link to="/login">Login</Link></li>
