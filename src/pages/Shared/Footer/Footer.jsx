@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -43,17 +44,18 @@ const Footer = () => {
             <div
               className="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4"
             >
-              <input
+              
+               <input
+               
                 type="email"
                 id="UserEmail"
-                placeholder="john@rhcp.com"
-                className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
-              />
+                placeholder="john@rhcp.com" 
+                className="w-full border-none input input-bordered sm:text-sm" />
 
               <button
                 className="mt-1 w-full bg-teal-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0"
               >
-                Sign Up
+               <Link to='/signup'> Sign Up</Link>
               </button>
             </div>
           </form>
