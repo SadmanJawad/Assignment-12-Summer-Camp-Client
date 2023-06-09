@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home/Home";
 import Error from "../components/Error/Error";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import Classes from "../pages/Classes/Classes";
 
 
   export const router = createBrowserRouter([
@@ -24,6 +25,11 @@ import SignUp from "../pages/SignUp/SignUp";
         {
           path: '/signup',
           element: <SignUp></SignUp>
+        },
+        {
+          path: 'approved-classes',
+          element: <Classes></Classes>
+
         }
       ]
     },

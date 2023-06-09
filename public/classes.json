@@ -1,0 +1,9 @@
+[{
+"image": "https://i.ibb.co/yQckYYh/soccer.jpg",
+"name" : "Youth Soccer Academy",
+"instructor": "Michael Rodriguez",
+"instructorEmail" : "michael.rodriguez@example.com",
+"availableSeats" : 30,
+"price" : 75,
+"numberOfStudents" : 20
+}]

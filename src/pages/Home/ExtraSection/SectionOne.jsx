@@ -4,7 +4,6 @@ import "./SectionOne.css";
 const SectionOne = () => {
   return (
     <div className="main mb-5">
-      <div className="overlay"></div>
       <video src={videoBg} autoPlay loop muted />
       <div className="content font-caveat">
         <h1 className="text-7xl">Welcome</h1>

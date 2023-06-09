@@ -26,6 +26,7 @@ const SignUp = () => {
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
           const saveUser = { name: data.name, email: data.email };
+          
           fetch("http://localhost:5000/user", {
             method: "POST",
             headers: {
@@ -54,15 +55,15 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className=" min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row">
           <div className="text-center md:w-1/2 lg:text-left">
             <h1 className="text-5xl text-center font-bold font-caveat mb-2">Sign Up now!</h1>
             <div style={{ width: "80%" }} className="mx-auto">
               <Lottie loop={true} animationData={login} />
             </div>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card md:w-1/2 max-w-xl shadow-2xl bg-base-100 min-h-screen">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
