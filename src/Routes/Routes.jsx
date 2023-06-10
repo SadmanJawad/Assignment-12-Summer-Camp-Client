@@ -7,6 +7,10 @@ import Error from "../components/Error/Error";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Classes from "../pages/Classes/Classes";
+import Dashboard from "../Layout/Dashboard";
+import PrivateRoutes from "./PrivateRoutes";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import ManageClass from "../pages/Dashboard/AllUsers/ManageClass/ManageClass";
 
 
   export const router = createBrowserRouter([
@@ -29,7 +33,20 @@ import Classes from "../pages/Classes/Classes";
         {
           path: 'approved-classes',
           element: <Classes></Classes>
-
+        }
+      ],
+    },
+    {
+      path: 'dashboard',
+      element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
+      children: [
+        {
+          path: 'allusers',
+          element: <AllUsers></AllUsers>
+        },
+        {
+          path: 'manageclasses',
+          element: <ManageClass></ManageClass>
         }
       ]
     },

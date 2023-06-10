@@ -13,7 +13,7 @@ const Classes = () => {
 
   return (
     <div className="py-[133px]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-8 mt-16">
         {approvedClasses.map((classItem) => (
         
         <div
@@ -22,7 +22,7 @@ const Classes = () => {
           >
              
               <img
-                className="w-full h-full" 
+                className="w-1/2 h-full" 
                 src={classItem.image}
                 alt="Class"
               />

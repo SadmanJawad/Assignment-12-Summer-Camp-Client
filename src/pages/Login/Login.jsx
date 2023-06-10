@@ -57,7 +57,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col md:flex-row">
           <div className="text-center md:w-1/2 lg:text-left">
             <h1 className="text-5xl text-center font-bold font-caveat">Login now!</h1>
