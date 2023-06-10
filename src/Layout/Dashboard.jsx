@@ -1,6 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaBars, FaUsers , FaHouseUser} from 'react-icons/fa';
 
+import { Slide } from "react-awesome-reveal";
+
 
 const Dashboard = () => {
 
@@ -23,7 +25,9 @@ const Dashboard = () => {
     <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
       {
         isAdmin ? <>
-         <h1 className="text-4xl font-caveat my-4">Frippo Sports Academy</h1>
+        <Slide >
+        <h1 className="text-4xl font-caveat my-4">Frippo Sports Academy</h1>
+        </Slide>
  <li><NavLink to="/dashboard/home"><FaHouseUser></FaHouseUser> Admin Home</NavLink></li>
                             
                             <li><NavLink to="/dashboard/manageclasses"> <FaBars></FaBars> Manage Classes</NavLink></li>

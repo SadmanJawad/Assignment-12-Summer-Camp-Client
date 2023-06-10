@@ -13,14 +13,21 @@ import img8 from "../../../assets/home/08.jpg";
 import img9 from "../../../assets/home/09.jpg";
 import { useState } from "react";
 
+import { Fade, Slide } from "react-awesome-reveal";
+
+
 const Banner = () => {
   
     const imgText = (
     <div className="content">
-      <h1 className="text-7xl font-caveat">Frippo Sports Academy</h1>
+<Slide>
+<h1 className="text-7xl font-caveat">Frippo Sports Academy</h1>
+</Slide>
+      <Fade delay={1e3} cascade damping={1e-1}>
       <p className="text-3xl">
         Professional sports instruction in a traditional camp environment.
       </p>
+      </Fade>
    <div className="flex gap-12">
    <button>
         <span>Camp Video</span>
