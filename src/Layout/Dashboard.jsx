@@ -5,9 +5,12 @@ import { Slide } from "react-awesome-reveal";
 
 const Dashboard = () => {
   // TODO: load data from the server to have dynamic isAdmin based on Data
+ 
   const isAdmin = true;
 
   const isInstructor = true;
+
+  const isStudent = true;
 
 
   return (
@@ -80,10 +83,34 @@ const Dashboard = () => {
 
               </>
             ) :
-             (
-              <> {/* //TODO user */}</>
-            )
-          } 
+              <></>
+} 
+{
+            isStudent ?
+            (
+              <>
+                 <Slide>
+                  <h1 className="text-4xl font-caveat my-4">
+                    Frippo Sports Academy
+                  </h1>
+                </Slide>
+<h1>Student Dashboard</h1>
+                <li>
+                  <NavLink to="/dashboard/myselectedclass">
+                    My Selected Class
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/myenrolledclass">
+                    My Enrolled Classes
+                  </NavLink>
+                </li>
+
+              </>
+            ) :
+              <></>
+}
 
             <div className="divider"></div>
             <li>
