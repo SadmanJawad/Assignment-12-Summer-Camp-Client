@@ -2,7 +2,7 @@
 const ManageClass = () => {
     return (
         <div>
-                <h1>Manage Class</h1>            
+        <h1>Manage Class This page will show all the classes</h1>            
         </div>
     );
 };

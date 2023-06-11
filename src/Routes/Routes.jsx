@@ -10,7 +10,7 @@ import Classes from "../pages/Classes/Classes";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
-import ManageClass from "../pages/Dashboard/AllUsers/ManageClass/ManageClass";
+import ManageClass from "../pages/Dashboard/ManageClass/ManageClass";
 
 
   export const router = createBrowserRouter([

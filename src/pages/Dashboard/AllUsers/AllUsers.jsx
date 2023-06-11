@@ -9,7 +9,7 @@ const AllUsers = () => {
   });
 
   const handleDelete = (user) => {
-
+    console.log(user);
 
   };
 
