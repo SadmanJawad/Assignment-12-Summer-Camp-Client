@@ -1,63 +1,120 @@
-import useClass from "../../../hooks/useClass";
+import { useState } from "react";
+import UserTable from "../../../components/UserTable/UserTable";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import FeedbackModal from "../../../components/Modal/FeedbackModal";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageClass = () => {
-    const [classes] = useClass();
+    // const [classes] = useClass();
+
+    const [axiosSecure] = useAxiosSecure();
+    const [isOpen, setIsOpen] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [selectedId, setSelectedId] = useState('');
+    const [disabledIds, setDisabledIds] = useState([]);
+    
+
+    const { data: classes = [], refetch } = useQuery(["classes"], async () => {
+        const res = await axiosSecure.get('/classes');
+        return res.data;
+    });
+
+    // onClick function to make a request to approve a class
+    const approveClass = async (id) => {
+        await axiosSecure.put(`/classes/approved/${id}`);
+        Swal.fire({
+            position: 'middle',
+            icon: 'success',
+            title: 'Class Approved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        setDisabledIds([...disabledIds, id]);
+
+        refetch();
+    };
+    const isButtonDisabled = (id) => disabledIds.includes(id);
+
+
+    // onClick function to make a request to deny a class
+    const denyClass = async (id) => {
+        await axiosSecure.put(`/classes/denied/${id}`);
+        Swal.fire({
+            position: 'middle',
+            icon: 'error',
+            title: 'class denied',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        setDisabledIds([...disabledIds, id]);
+
+        refetch();
+        
+    };
+
+      // for modal
+
+      const openModal = (id) => {
+        setIsOpen(true);
+        setSelectedId(id);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+        setSelectedId('');
+    };
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    const handleSend = () => {
+        console.log( inputValue,);
+        //   sending feedback to the db
+        axiosSecure.put(`/classes/feedback/${selectedId}`, {  inputValue });
+        setInputValue('');
+        // Close the modal
+        closeModal();
+        Swal.fire({
+            position: 'middle',
+            icon: 'success',
+            title: 'Feedback sent',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    };
+
 
     return (
-        <div className="w-full h-full">
-        <h1 className="font-caveat text-3xl text-center my-3">Manage All Classes</h1>            
 
-        <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>Class Image & Name</th>
-        <th>Instructor Name</th>
-        <th>Available Seats</th>
-        <th>Price</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-{
-    classes.map( cls => <tr key={cls._id}>
+<div>
 
-        <td>
-          <div className="flex items-center space-x-3">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
-                <img src={cls.image} alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">{cls.name}</div>
-            </div>
-          </div>
-        </td>
-        <td>
-        {cls.instructor}
-        </td>
-        <td>{cls.availableSeats}</td>
-        <td>
-            ${cls.price}
-        </td>
-        <td className="flex">
-        <button className="btn  btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-green-600">Approve</button>
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-red-600">Deny</button>
-        <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-sky-300">Feedback</button>
-        </td>
-      </tr> )
-}
-      
-    </tbody>
-   
+<UserTable classes={classes}
+    approveClass={approveClass}
+    denyClass={denyClass}
+    refetch={refetch}
+    openModal={openModal}
+    isOpen={isOpen}
+    closeModal={closeModal}
+    inputValue={inputValue}
+    handleInputChange={handleInputChange}
+    handleSend={handleSend}
+    isButtonDisabled={isButtonDisabled}
     
-  </table>
+/>
+<FeedbackModal
+    isOpen={isOpen}
+    openModal={openModal}
+    closeModal={closeModal}
+    inputValue={inputValue}
+    handleInputChange={handleInputChange}
+    handleSend={handleSend}
+></FeedbackModal>
 </div>
 
 
-        </div>
+
     );
 };
 

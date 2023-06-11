@@ -1,11 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaBars, FaUsers, FaHouseUser } from "react-icons/fa";
+import { FaBars, FaUsers } from "react-icons/fa";
 
 import { Slide } from "react-awesome-reveal";
 
 const Dashboard = () => {
   // TODO: load data from the server to have dynamic isAdmin based on Data
   const isAdmin = true;
+
+  const isInstructor = true;
+
 
   return (
     <div>
@@ -24,19 +27,16 @@ const Dashboard = () => {
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-            {isAdmin ? (
+          {
+            isAdmin ? (
               <>
                 <Slide>
                   <h1 className="text-4xl font-caveat my-4">
                     Frippo Sports Academy
                   </h1>
                 </Slide>
-                <li>
-                  <NavLink to="/dashboard/home">
-                    <FaHouseUser></FaHouseUser> Admin Home
-                  </NavLink>
-                </li>
-
+              
+                  <h1>Admin Dashboard</h1>
                 <li>
                   <NavLink to="/dashboard/manageclasses">
                     {" "}
@@ -51,9 +51,39 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
               </>
-            ) : (
-              <>{/* user er sb kichu ekhane jabe */}</>
-            )}
+            ) : 
+                <></>
+
+          }
+
+{
+            isInstructor ?   
+            (
+              <>
+                <Slide>
+                  <h1 className="text-4xl font-caveat my-4">
+                    Frippo Sports Academy
+                  </h1>
+                </Slide>
+<h1>Instructor Dashboard</h1>
+                <li>
+                  <NavLink to="/dashboard/addClass">
+                    Add a class
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/myClass">
+                    My Classes
+                  </NavLink>
+                </li>
+
+              </>
+            ) :
+             (
+              <> {/* //TODO user */}</>
+            )
+          } 
 
             <div className="divider"></div>
             <li>
