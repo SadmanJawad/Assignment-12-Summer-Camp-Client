@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { postSelectedClasses } from "../../API/addClass/addClass";
 
 const Classes = () => {
 
 
   
-  const [approvedClasses, setApprovedClasses] = useState([]);
+const [approvedClasses, setApprovedClasses] = useState([]);
 const {user} = useAuth()
 const navigate = useNavigate()
-const location = useLocation()
+
 
 
 
@@ -23,45 +24,37 @@ const location = useLocation()
   }, []);
 
 
-  const handleSelect = item => {
-    console.log(item);
-    if(user){
-      fetch('http://localhost:5000/classes/selected',{
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify()
-      })
-      .then(res => res.json())
-      .then(data => {
-        if(data.insertedId){
-          Swal.fire({
-            position: 'middle',
-            icon: 'success',
-            title: 'Class Selected',
-            showConfirmButton: false,
-            timer: 1500
-        })
-        }
-      })
-    }
-    else{
-      Swal.fire({
-        title: 'Please Login to select a class',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Login Now'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate('/login', {state: {from: location}})
-        }
-      })
-    }
+  const handleSelected = (classItem) => {
+    if (!user) {
+        Swal.fire({
+            icon: "error",
+            title: "You need to login first",
+            text: "Please login first",
 
-  }
+        });
+        navigate('/login')
+        return;
+    }
+    const userEmail = user.email;
+    classItem.userEmail = userEmail;
+    classItem.userName = user.displayName;
+    classItem.classId = classItem._id;
+    delete classItem._id;
+    postSelectedClasses(classItem)
+        
+        .then((data) => {
+            if(data.insertedId) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Class selected ",
+                });
+            }
+                    
+        });
+
+}
+
 
   
 
@@ -83,7 +76,7 @@ const location = useLocation()
            
            
             <div className={`card-body ${
-              classItem.availableSeats === 0 ? "bg-red-400" : "bg-red-50"
+              classItem.availableSeats === 0 ? "bg-red-600" : "bg-red-50"
             }`}>
               <h2 className="card-title text-xl font-serif text-blue-950">
                 {classItem.name}
@@ -99,7 +92,7 @@ const location = useLocation()
                     Select
                   </button>
                 ) : (
-                  <button onClick={() => handleSelect(classItem)} className="btn btn-primary">Select</button>
+                  <button onClick={()=>handleSelected(classItem)}  className="btn btn-primary">Select</button>
                 )}
               </div>
            
