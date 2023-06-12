@@ -1,7 +1,18 @@
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Classes = () => {
+
+
+  
   const [approvedClasses, setApprovedClasses] = useState([]);
+const {user} = useAuth()
+const navigate = useNavigate()
+const location = useLocation()
+
+
 
   useEffect(() => {
     fetch("http://localhost:5000/approved-classes")
@@ -10,6 +21,49 @@ const Classes = () => {
         setApprovedClasses(data);
       });
   }, []);
+
+
+  const handleSelect = item => {
+    console.log(item);
+    if(user){
+      fetch('http://localhost:5000/classes/selected',{
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify()
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.insertedId){
+          Swal.fire({
+            position: 'middle',
+            icon: 'success',
+            title: 'Class Selected',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        }
+      })
+    }
+    else{
+      Swal.fire({
+        title: 'Please Login to select a class',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Login Now'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login', {state: {from: location}})
+        }
+      })
+    }
+
+  }
+
+  
 
   return (
     <div className="py-[133px]">
@@ -45,7 +99,7 @@ const Classes = () => {
                     Select
                   </button>
                 ) : (
-                  <button className="btn btn-primary">Select</button>
+                  <button onClick={() => handleSelect(classItem)} className="btn btn-primary">Select</button>
                 )}
               </div>
            

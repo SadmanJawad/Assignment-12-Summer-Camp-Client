@@ -15,6 +15,7 @@ import AddClass from "../pages/Dashboard/AddClass/AddClass";
 import MyClass from "../pages/Dashboard/MyClass/MyClass";
 import MySelectedClass from "../pages/Dashboard/MySeclectedClass/MySelectedClass";
 import MyEnrolledClases from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledClases";
+import Instructors from "../pages/Instructors/Instructors";
 
 
   export const router = createBrowserRouter([
@@ -37,6 +38,10 @@ import MyEnrolledClases from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledCla
         {
           path: 'approved-classes',
           element: <Classes></Classes>
+        },
+        {
+          path: 'instructors',
+          element: <Instructors></Instructors>
         }
       ],
     },

@@ -23,6 +23,7 @@ const Banner = () => {
 <Slide>
 <h1 className="text-7xl font-caveat">Frippo Sports Academy</h1>
 </Slide>
+
       <Fade delay={1e3} cascade damping={1e-1}>
       <p className="text-3xl">
         Professional sports instruction in a traditional camp environment.

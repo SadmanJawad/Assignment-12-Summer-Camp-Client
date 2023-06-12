@@ -10,7 +10,7 @@ const AddClassFrom = ({
   
     return (
         <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
-            <iframe src="https://embed.lottiefiles.com/animation/45241"></iframe>
+           <iframe src="https://embed.lottiefiles.com/animation/68324"></iframe>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
                     <div className='space-y-6'>
@@ -19,7 +19,7 @@ const AddClassFrom = ({
                                 Instructor Name
                             </label>
                             <input
-                                className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+                                className='w-full px-4 py-3 text-gray-800 border border-green-300 focus:outline-green-500 rounded-md '
                                 name='instructor'
                                 id='instructor'
                                 type='text'
@@ -33,7 +33,7 @@ const AddClassFrom = ({
                                 Email
                             </label>
                             <input
-                                className='w-full px-4 py-3  text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+                                className='w-full px-4 py-3  text-gray-800 border border-green-300 focus:outline-green-500 rounded-md '
                                 name='email'
                                 id='email'
                                 type='text'
@@ -47,7 +47,7 @@ const AddClassFrom = ({
                                 Price
                             </label>
                             <input
-                                className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+                                className='w-full px-4 py-3 text-gray-800 border border-green-300 focus:outline-green-500 rounded-md '
                                 name='price'
                                 id='price'
                                 type='number'
@@ -66,7 +66,7 @@ const AddClassFrom = ({
                                 Class Name
                             </label>
                             <input
-                                className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+                                className='w-full px-4 py-3 text-gray-800 border border-green-300 focus:outline-green-500 rounded-md '
                                 name='class'
                                 id='class'
                                 type='text'
@@ -88,7 +88,7 @@ const AddClassFrom = ({
                                             accept='image/*'
                                             hidden
                                         />
-                                        <div className='bg-rose-500 text-white border border-gray-300  rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500'>
+                                        <div className='bg-green-600 text-white border border-gray-300  rounded font-semibold cursor-pointer p-1 px-3 hover:bg-green-400'>
                                             {uploadButtonText}
                                         </div>
                                     </label>
@@ -103,7 +103,7 @@ const AddClassFrom = ({
                                     Available seats
                                 </label>
                                 <input
-                                    className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+                                    className='w-full px-4 py-3 text-gray-800 border border-green-300 focus:outline-green-500 rounded-md '
                                     name='seats'
                                     id='seats'
                                     type='number'
@@ -121,12 +121,12 @@ const AddClassFrom = ({
 
                 <button
                     type='submit'
-                    className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500'
+                    className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-green-600'
                 >
                     {loading ? (
                         <ImSpinner10 className='m-auto animate-spin' size={24} />
                     ) : (
-                        'Add Button'
+                        'Add Class'
                     )}
                 </button>
             </form>

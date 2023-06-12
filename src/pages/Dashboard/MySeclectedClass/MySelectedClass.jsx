@@ -2,7 +2,7 @@
 const MySelectedClass = () => {
     return (
         <div>
-            <h1>Selected</h1>
+        <h1>Selected class</h1>            
         </div>
     );
 };
