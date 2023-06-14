@@ -42,7 +42,7 @@ const MySelectedClass = () => {
     
 
     return (
-        <div>
+        <div className="ml-64">
            <MyClassTable 
        refetch={refetch}
        classes={classes}

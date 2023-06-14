@@ -4,14 +4,16 @@ import { useState } from "react";
 
 const PopularInstructor = () => {
     const [popularInstructors, setPopularInstructors] = useState([])
+    const [loading , setLoading] = useState(true);
 
     useEffect( () => {
         fetch('http://localhost:5000/instructors/popular')
         .then(res => res.json())
         .then(data => {
             setPopularInstructors(data)
+            setLoading(false);
         })
-        }, [])
+        }, [popularInstructors, loading])
 
 
     return (

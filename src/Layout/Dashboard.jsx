@@ -1,128 +1,230 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { FaBars, FaUsers } from "react-icons/fa";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import {
+  FaBars,
+  FaBook,
+  FaBookReader,
+  FaBookmark,
+  FaEdit,
+  FaRegPlusSquare,
+  FaTimes,
+  FaUserEdit,
+  FaWallet,
+} from "react-icons/fa";
 
+// import { Slide } from "react-awesome-reveal";
+import useAuth from "../hooks/useAuth";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getRole } from "../API/getRole";
 import { Slide } from "react-awesome-reveal";
 
 const Dashboard = () => {
   // TODO: load data from the server to have dynamic isAdmin based on Data
- 
-  const isAdmin = true;
 
-  const isInstructor = true;
+  const { user, role, logOut } = useAuth();
 
-  const isStudent = true;
+  const [isActive, setActive] = useState("false");
+  // const navigate = useNavigate();
 
+  const [userRole , setUserRole] = useState("");
+  console.log("ei user role", userRole);
+
+  useEffect(() => {
+    if (user) {
+      getRole(user?.email).then((data) => {
+        setUserRole(data);
+        console.log('setuserrole', setUserRole);
+      });
+    }
+  }, [user]);
+
+  console.log(userRole);
 
   return (
     <div>
-      <div className="drawer lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
-          >
-            Open drawer
-          </label>
-          <Outlet></Outlet>
-        </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu w-20 h-full bg-base-200 text-base-content table table-pin-rows">
-          {
-            isAdmin ? (
-              <>
+      <div className="p-5">
+        <Outlet></Outlet>
+
+        {/* Sidebar */}
+        <div
+          className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden w-80 space-y-6 px-2 py-4 absolute top-0 inset-y-0 left-0 transform bg-green-200 ${
+            isActive && "-translate-x-full"
+          }  md:translate-x-0  transition duration-200 ease-in-out`}
+        >
+          <div>
+            <div className="flex flex-col justify-between flex-1 mt-6">
+              <nav>
                 <Slide>
                   <h1 className="text-4xl font-caveat my-4">
                     Frippo Sports Academy
                   </h1>
                 </Slide>
-              
-                  <h1>Admin Dashboard</h1>
-                <li>
-                  <NavLink to="/dashboard/manageclasses">
-                    {" "}
-                    <FaBars></FaBars> Manage Classes
-                  </NavLink>
-                </li>
 
-                <li>
-                  <NavLink to="/dashboard/allusers">
-                    {" "}
-                    <FaUsers></FaUsers> Manage Users
-                  </NavLink>
-                </li>
-              </>
-            ) : 
-                <></>
+                {userRole === "admin" && (
+                  <>
+                    <NavLink
+                      to="/dashboard/allusers"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30 " : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaUserEdit className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">Manage Users</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/manageclasses"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaEdit className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">Manage Classes</span>
+                    </NavLink>
+                  </>
+                )}
 
-          }
+                {userRole == "user" && (
+                  <>
+                    <NavLink
+                      to="/dashboard/myselectedclass"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaBook className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">
+                        My Selected Classes
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/myenrolledclass"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaBookmark className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">
+                        My Enrolled Classes
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/paymenthistory"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaWallet className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">Payment History</span>
+                    </NavLink>
+                  </>
+                )}
 
-{
-            isInstructor ?   
-            (
-              <>
-                <Slide>
-                  <h1 className="text-4xl font-caveat my-4">
-                    Frippo Sports Academy
-                  </h1>
-                </Slide>
-<h1>Instructor Dashboard</h1>
-                <li>
-                  <NavLink to="/dashboard/addClass">
-                    Add a class
-                  </NavLink>
-                </li>
+                
+                {userRole === "" && (
+                  <>
+                    <NavLink
+                      to="/dashboard/myselectedclass"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaBook className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">
+                        My Selected Classes
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/myenrolledclass"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaBookmark className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">
+                        My Enrolled Classes
+                      </span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/paymenthistory"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaWallet className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">Payment History</span>
+                    </NavLink>
+                  </>
+                )}
 
-                <li>
-                  <NavLink to="/dashboard/myClass">
-                    My Classes
-                  </NavLink>
-                </li>
-
-              </>
-            ) :
-              <></>
-} 
-{
-            isStudent ?
-            (
-              <>
-                 <Slide>
-                  <h1 className="text-4xl font-caveat my-4">
-                    Frippo Sports Academy
-                  </h1>
-                </Slide>
-<h1>Student Dashboard</h1>
-                <li>
-                  <NavLink to="/dashboard/myselectedclass">
-                    My Selected Class
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink to="/dashboard/myenrolledclass">
-                    My Enrolled Classes
-                  </NavLink>
-                </li>
-
-              </>
-            ) :
-              <></>
-}
-
+                {userRole === "instructor" && (
+                  <>
+                    <NavLink
+                      to="/dashboard/myClass"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaBookReader className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">My Classes</span>
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/addClass"
+                      className={({ isActive }) =>
+                        `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${
+                          isActive ? "bg-info/30" : "text-gray"
+                        }`
+                      }
+                    >
+                      <FaRegPlusSquare className="w-5 h-5" />{" "}
+                      <span className="mx-4 font-medium">Add Class</span>
+                    </NavLink>
+                  </>
+                )}
+              </nav>
+            </div>
             <div className="divider"></div>
-            <li>
-              <NavLink to="/"> Home</NavLink>{" "}
-            </li>
-            <li>
-              <NavLink to="/instructors">Instructors</NavLink>
-            </li>
-            <li>
-              <NavLink to="/approved-classes">Classes</NavLink>
-            </li>
-          </ul>
+          <div className="btm-nav mb-2">
+            <button className="active bg-pink-200 text-pink-600">
+              <span className="btm-nav-label">
+                {" "}
+                <NavLink to="/"> Home</NavLink>{" "}
+              </span>
+            </button>
+
+            <button className="active bg-neutral text-neutral-content">
+              <span className="btm-nav-label">
+                <NavLink to="/instructors">Instructors</NavLink>
+              </span>
+            </button>
+
+            <button className="active bg-teal-200 text-teal-600">
+              <span className="btm-nav-label">
+                {" "}
+                <NavLink to="/approved-classes">Classes</NavLink>
+              </span>
+            </button>
+          </div>
+          </div>
+
+          
         </div>
       </div>
     </div>

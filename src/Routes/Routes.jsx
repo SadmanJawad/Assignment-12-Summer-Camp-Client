@@ -16,6 +16,10 @@ import MyClass from "../pages/Dashboard/MyClass/MyClass";
 import MySelectedClass from "../pages/Dashboard/MySeclectedClass/MySelectedClass";
 import MyEnrolledClases from "../pages/Dashboard/MyEnrolledClasses/MyEnrolledClases";
 import Instructors from "../pages/Instructors/Instructors";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 
 
   export const router = createBrowserRouter([
@@ -51,19 +55,19 @@ import Instructors from "../pages/Instructors/Instructors";
       children: [
         {
           path: 'allusers',
-          element: <AllUsers></AllUsers>
+          element: <><AllUsers></AllUsers></>
         },
         {
           path: 'manageclasses',
-          element: <ManageClass></ManageClass>
+          element:<> <ManageClass></ManageClass></>
         },
         {
           path: 'addClass',
-          element: <AddClass></AddClass>
+          element: <><AddClass></AddClass></>
         },
         {
           path: 'myClass',
-          element: <MyClass></MyClass>
+          element: <><MyClass></MyClass></>
         },
         {
           path: 'myselectedclass',
@@ -72,6 +76,14 @@ import Instructors from "../pages/Instructors/Instructors";
         {
           path: 'myenrolledclass',
           element: <MyEnrolledClases></MyEnrolledClases>
+        },
+        {
+          path: 'payment/:id',
+          element: <Payment></Payment>
+        },
+        {
+          path: "paymenthistory",
+          element: <PaymentHistory></PaymentHistory>
         }
       ]
     },

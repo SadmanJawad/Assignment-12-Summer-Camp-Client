@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaUser } from "react-icons/fa";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, role } = useContext(AuthContext);
+  const admin = role === "admin";
+  const instructor = role === "instructor";
+  const location = useLocation()
 
   const handleLogOut = () => {
     logOut()
@@ -17,7 +20,26 @@ const NavBar = () => {
     
     <li><Link to='/instructors'>Instructors</Link></li>
     <li><Link to='/approved-classes'>Classes</Link></li>
-    <li><Link to='/dashboard'>Dashboard</Link></li>
+    {user && (
+                <Link
+                    to={
+                        admin
+                            ? "/dashboard/manageclasses"
+                            : instructor
+                                ? "/dashboard/addClass"
+                                : "/dashboard/myClass"
+                    }
+                    className={
+                        location.pathname === "/dashboard/manageclasses" ||
+                            location.pathname === "/dashboard/addClass" ||
+                            location.pathname === "/dashboard/myClass"
+                            ? "active"
+                            : ""
+                    }
+                >
+                    <div className="px-1 mt-2">Dashboard</div>
+                </Link>
+            )}
     </>
     return (
         <>

@@ -1,7 +1,6 @@
 
-const SinglePopularInstrucors = ({ins, user}) => {
+const SinglePopularInstrucors = ({ins}) => {
     const { name, photoURL, } = ins;
-    console.log(user);
 
 
 

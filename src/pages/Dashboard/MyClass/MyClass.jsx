@@ -16,7 +16,7 @@ const MyClass = () => {
 
 
     return (
-        <div>
+        <div className="ml-80">
            <h1 className="uppercase text-4xl text-center my-3">My classes</h1> 
 
 
