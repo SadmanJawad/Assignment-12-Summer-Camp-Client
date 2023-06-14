@@ -27,12 +27,12 @@ const NavBar = () => {
                             ? "/dashboard/manageclasses"
                             : instructor
                                 ? "/dashboard/addClass"
-                                : "/dashboard/myClass"
+                                : "/dashboard/myselectedclass"
                     }
                     className={
                         location.pathname === "/dashboard/manageclasses" ||
                             location.pathname === "/dashboard/addClass" ||
-                            location.pathname === "/dashboard/myClass"
+                            location.pathname === "/dashboard/myselectedclass"
                             ? "active"
                             : ""
                     }

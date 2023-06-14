@@ -25,7 +25,7 @@ const SignUp = () => {
 
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          const saveUser = { name: data.name, email: data.email, photoURL: data.photoURL };
+          const saveUser = { name: data.name, email: data.email, photoURL: data.photoURL, role: "user" };
           
           fetch(`${import.meta.env.VITE_server_url}/users`, {
             method: "POST",
