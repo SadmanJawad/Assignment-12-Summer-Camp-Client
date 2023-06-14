@@ -17,4 +17,5 @@
 - sweetalert2
 - express
 - dotenv
-- 
+- react reveal
+- google font
