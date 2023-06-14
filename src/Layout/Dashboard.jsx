@@ -1,12 +1,10 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
-  FaBars,
   FaBook,
   FaBookReader,
   FaBookmark,
   FaEdit,
   FaRegPlusSquare,
-  FaTimes,
   FaUserEdit,
   FaWallet,
 } from "react-icons/fa";

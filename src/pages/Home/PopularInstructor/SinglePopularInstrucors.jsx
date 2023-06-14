@@ -1,4 +1,6 @@
 
+
+
 const SinglePopularInstrucors = ({ins}) => {
     const { name, photoURL, } = ins;
 
@@ -12,7 +14,7 @@ const SinglePopularInstrucors = ({ins}) => {
     <h2 className="card-title">{name}</h2>
     <h2 className="card-title">Number of Students: 0</h2>
     <div className="card-actions justify-end">
-      <button className="btn btn-primary">Select</button>
+      <button className="btn btn-ghost bg-emerald-400 text-white">Select</button>
     </div>
   </div>
 </div>
