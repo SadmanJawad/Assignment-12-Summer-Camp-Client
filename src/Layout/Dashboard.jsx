@@ -24,21 +24,18 @@ const Dashboard = () => {
   const { user, role, logOut } = useAuth();
 
   const [isActive, setActive] = useState("false");
-  // const navigate = useNavigate();
 
-  const [userRole , setUserRole] = useState("");
+  const [userRole , setUserRole] = useState("user");
   console.log("ei user role", userRole);
 
   useEffect(() => {
     if (user) {
       getRole(user?.email).then((data) => {
         setUserRole(data);
-        console.log('setuserrole', setUserRole);
       });
     }
-  }, [user]);
+  }, [user, userRole]);
 
-  console.log(userRole);
 
   return (
     <div>
@@ -47,7 +44,7 @@ const Dashboard = () => {
 
         {/* Sidebar */}
         <div
-          className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden w-80 space-y-6 px-2 py-4 absolute top-0 inset-y-0 left-0 transform bg-green-200 ${
+          className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden w-68 space-y-6 px-2 py-4 absolute top-0 inset-y-0 left-0 transform bg-green-200 ${
             isActive && "-translate-x-full"
           }  md:translate-x-0  transition duration-200 ease-in-out`}
         >

@@ -7,7 +7,7 @@ const MyEnrolledClases = () => {
     const [classes, setClasses] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/enrolled/${user?.email}`)
+        fetch(`${import.meta.env.VITE_server_url}/enrolled/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);

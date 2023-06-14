@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
+    const res = await fetch(`${import.meta.env.VITE_server_url}/users`);
     return res.json();
   });
 
@@ -14,7 +14,7 @@ const AllUsers = () => {
   };
 
   const handleMakeAdmin = user => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
+    fetch(`${import.meta.env.VITE_server_url}/users/admin/${user._id}`, {
       method: "PATCH"
     })
       .then((res) => res.json())
@@ -34,7 +34,7 @@ const AllUsers = () => {
   };
 
   const handleMakeInstructor = user => {
-    fetch(`http://localhost:5000/users/instructor/${user._id}`,{
+    fetch(`${import.meta.env.VITE_server_url}/users/instructor/${user._id}`,{
         method: "PATCH"
     })
     .then(res => res.json())
@@ -55,7 +55,7 @@ const AllUsers = () => {
   
 
   return (
-    <div>
+    <div className="ml-64">
       <h1 className="text-3xl font-semibold">Total users : {users.length}</h1>
       <div className="overflow-x-auto">
         <table className="table table-zebra">

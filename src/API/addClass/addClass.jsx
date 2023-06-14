@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export const addClass = async (classData) => {
-    const response = await fetch('http://localhost:5000/classes', {
+    const response = await fetch(`${import.meta.env.VITE_server_url}/classes`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -13,10 +13,9 @@ export const addClass = async (classData) => {
   return data;
 }
 
-
 // posting selected classes by user
 export const postSelectedClasses = async (selectedClass) => {
-    const response = await fetch('http://localhost:5000/classes/selected', {
+    const response = await fetch(`${import.meta.env.VITE_server_url}/classes/selected`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +27,7 @@ export const postSelectedClasses = async (selectedClass) => {
 }
 // get selected classes by user
 export const getSelectedClasses = async (email) => {
-    const response = await fetch(`http://localhost:5000/classes/selected/${email}`)
+    const response = await fetch(`${import.meta.env.VITE_server_url}/classes/selected/${email}`)
    const data = await response.json()
     return data;
 }
@@ -36,13 +35,13 @@ export const getSelectedClasses = async (email) => {
 
 // getting classes according to the logged in user email using axios and tanstack query
 export const GetClasses = (email) => {
-    return useQuery('classes', () => axios.get(`http://localhost:5000/classes/${email}`))
+    return useQuery('classes', () => axios.get(`${import.meta.env.VITE_server_url}/classes/${email}`))
 }
 
 // getting classes to display in the admin dashboard
 export const fetchClasses = async () => {
     try {
-      const response = await fetch('http://localhost:5000/classes');
+      const response = await fetch(`${import.meta.env.VITE_server_url}/classes`);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -54,7 +53,7 @@ export const fetchClasses = async () => {
 // fetch selected class by id
 export const fetchSelectedClassById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/classes/get/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_server_url}/classes/get/${id}`);
       const data = await response.json();
       return data;
     } catch (error) {

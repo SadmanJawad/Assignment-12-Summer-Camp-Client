@@ -11,7 +11,7 @@ const PopularClasses = () => {
     const [popularClasses, setPopularClasses] = useState([])
 
     useEffect( () => {
-        fetch('http://localhost:5000/popular-classes')
+        fetch(`${import.meta.env.VITE_server_url}/popular-classes`)
         .then(res => res.json())
         .then(data => {
             setPopularClasses(data)

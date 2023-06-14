@@ -16,7 +16,7 @@ const navigate = useNavigate()
 
 
   useEffect(() => {
-    fetch("http://localhost:5000/approved-classes")
+    fetch(`${import.meta.env.VITE_server_url}/approved-classes`)
       .then((res) => res.json())
       .then((data) => {
         setApprovedClasses(data);
@@ -59,8 +59,8 @@ const navigate = useNavigate()
   
 
   return (
-    <div className="py-[133px]">
-      <div className="grid grid-cols-1 md:grid-cols-1 gap-8 mt-16">
+    <div className="py-[33px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-16">
         {approvedClasses.map((classItem) => (
         
         <div
@@ -69,7 +69,7 @@ const navigate = useNavigate()
           >
              
               <img
-                className="w-1/2 h-full" 
+                className="w-2/3 h-full" 
                 src={classItem.image}
                 alt="Class"
               />
@@ -92,7 +92,7 @@ const navigate = useNavigate()
                     Select
                   </button>
                 ) : (
-                  <button onClick={()=>handleSelected(classItem)}  className="btn btn-primary">Select</button>
+                  <button onClick={()=>handleSelected(classItem)}  className="btn btn-ghost bg-green-500 text-white">Select</button>
                 )}
               </div>
            

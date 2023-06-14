@@ -7,7 +7,7 @@ const PopularInstructor = () => {
     const [loading , setLoading] = useState(true);
 
     useEffect( () => {
-        fetch('http://localhost:5000/instructors/popular')
+        fetch(`${import.meta.env.VITE_server_url}/instructors/popular`)
         .then(res => res.json())
         .then(data => {
             setPopularInstructors(data)

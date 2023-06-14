@@ -55,19 +55,19 @@ import InstructorRoute from "./InstructorRoute";
       children: [
         {
           path: 'allusers',
-          element: <><AllUsers></AllUsers></>
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
         },
         {
           path: 'manageclasses',
-          element:<> <ManageClass></ManageClass></>
+          element:<AdminRoute> <ManageClass></ManageClass></AdminRoute>
         },
         {
           path: 'addClass',
-          element: <><AddClass></AddClass></>
+          element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
         },
         {
           path: 'myClass',
-          element: <><MyClass></MyClass></>
+          element: <InstructorRoute><MyClass></MyClass></InstructorRoute>
         },
         {
           path: 'myselectedclass',

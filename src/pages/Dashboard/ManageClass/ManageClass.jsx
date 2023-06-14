@@ -88,7 +88,7 @@ const ManageClass = () => {
 
     return (
 
-<div>
+<div className="ml-72">
 
 <UserTable classes={classes}
     approveClass={approveClass}
